@@ -1,0 +1,200 @@
+<body>
+  <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Your Résumé
+          </mat-panel-title>
+          <mat-panel-description>
+            View Your Résumé
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table *ngIf="userDetails" class="table-fill">
+            <thead>
+              <tr>
+                  <th colspan="2" class="text-center">Résumé</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>First Name</td>
+                  <td>{{userDetails.fullName.split(' ')[0]}}</td>
+              </tr>
+              <tr>
+                  <td>Last Name</td>
+                  <td>{{userDetails.fullName.split(' ')[1]}}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{userDetails.email}}</td>
+              </tr>
+              <tr>
+                <td>City</td>
+                <td>{{userDetails.city}}</td>
+              </tr>
+              <tr>
+                <td>Phone</td>
+                <td>{{userDetails.phone}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </mat-expansion-panel>
+
+
+      <!--                  E D U C A T I O N                  -->
+
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Education
+            </mat-panel-title>
+            <mat-panel-description>
+              Add Your Education
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <form *ngIf="showSchoolsForm" [formGroup]="schoolsForm">
+              <div>
+                <div style="border:1px solid blue; text-align:center; padding:10px; margin:5px;">
+                    <mat-form-field>
+                        <input matInput placeholder="School Name" class="form-control" name="schoolName_{{school.id" formControlName="schoolName" required="true"/>
+                    </mat-form-field><br>
+                    <p>School Type:</p>
+                    <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" formControlName="schoolType" required>
+                        <mat-button-toggle value="High School">High School</mat-button-toggle>
+                        <mat-button-toggle value ="College">College</mat-button-toggle>
+                        <mat-button-toggle value ="Business or Trade School">Business or Trade School</mat-button-toggle>
+                        <mat-button-toggle value="Professional School">Professional School</mat-button-toggle>
+                      </mat-button-toggle-group><br>{{toggleGroup.value}}<br>
+                    <mat-form-field>
+                      <input matInput placeholder="Address" formControlName="address" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="City" formControlName="city" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="State" formControlName="state" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="ZIP" formControlName="zip" required>
+                    </mat-form-field><br>
+                    <mat-form-field>
+                        <input matInput placeholder="Degree" formControlName="degree" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Major" formControlName="major" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Years Completed" formControlName="yearsCompleted" required>
+                    </mat-form-field>
+                    <br>
+                    <button mat-stroked-button color="primary" (click)="addNewSchool()"><b>Submit</b></button>
+                </div>
+              </div>
+          </form>
+          <br>
+          <button mat-raised-button color="warn" (click)="toggleSchoolsForm()"><b>Toggle Education Form</b></button>
+
+        </mat-expansion-panel>
+
+
+        <!--       E  M  P  L  O  Y  M  E  N  T                         -->
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                Employment
+              </mat-panel-title>
+              <mat-panel-description>
+                Add your Employment
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <form *ngIf="showEmploymentsForm" [formGroup]="employmentsForm">
+              <div>
+                <div style="border:1px solid blue; text-align:center; padding:10px; margin:5px;">
+                  <mat-form-field>
+                      <input matInput placeholder="Employer Name" class="form-control" formControlName="employerName" required/>
+                  </mat-form-field><br>
+                  <mat-form-field>
+                      <input matInput placeholder="Address" class="form-control" formControlName="address" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="City" class="form-control" formControlName="city" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="State" class="form-control" formControlName="state" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="ZIP" class="form-control" formControlName="zip" required/>
+                  </mat-form-field><br>
+                  <mat-form-field>
+                      <input matInput placeholder="Supervisor or Contact" class="form-control" formControlName="supervisionContact" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="Phone" class="form-control" formControlName="phone" required/>
+                  </mat-form-field><br>
+                  <mat-form-field>
+                      <input matInput placeholder="Position" class="form-control" formControlName="position" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="Start Date"class="form-control" formControlName="startDate" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="End Date"class="form-control" formControlName="endDate" required/>
+                  </mat-form-field>
+                  <mat-form-field>
+                      <input matInput placeholder="Reason For Quitting"class="form-control" formControlName="reasonForQuiting" required/>
+                  </mat-form-field>
+                  <br>
+                  <button mat-stroked-button color="primary" (click)="addNewEmployer()"><b>Submit</b></button>
+                </div>
+              </div>
+            </form>
+            <br>
+            <button mat-raised-button color="warn" (click)="toggleEmploymentsForm()"><b>Toggle Employer Form</b></button>
+
+
+          </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Certifications
+                </mat-panel-title>
+                <mat-panel-description>
+                  Add your Certifications
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <!-- *ngFor="let certificate of CertificationList" TODO: add certificates here -->
+              <form *ngIf="showCertificateForm" [formGroup]="certificateForm">
+                  <div>
+                    <div style="border:1px solid blue; text-align:center; padding:10px; margin:5px;">
+                      <mat-form-field>
+                        <input matInput placeholder="Issuer / Authority" formControlName="issuer" required>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Certification" formControlName="certification" required>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Certificate Number/ID" formControlName="certNumber" required>
+                      </mat-form-field><br>
+                      <button mat-stroked-button color="primary" (click)="addNewCertification()"><b>Submit</b></button>
+                    </div>
+                  </div>
+              </form>
+              <button mat-raised-button color="warn" (click)="toggleCertificationForm()"><b>Toggle Certification Form</b></button>
+          </mat-expansion-panel>
+    </mat-accordion>
+    &nbsp;
+    <br>
+    <span md-colors="{color:'primary'}">
+        <mat-card-title>
+            Welcome to the Calisota App!
+        </mat-card-title><br><br>
+        <mat-card-content>
+        </mat-card-content>
+      </span>
+
+</body>
+

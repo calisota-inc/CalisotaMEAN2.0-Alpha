@@ -1,0 +1,201 @@
+<br><br><br><br>
+<form #signUpForm="ngForm" class="center" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="text" #schoolName="ngModel" [(ngModel)]="userService.selectedUser.schoolName" name="schoolName" placeholder="Scool Name"
+    required  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolName.valid }">
+    <div *ngIf="signUpForm.submitted && !schoolName.valid">
+     <label class="validation-message">This field is required.</label>
+    </div><br>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+      <mat-button-toggle-group #toggleGroup="matButtonToggleGroup" name="schoolType" [(ngModel)]="userService.selectedUser.schoolType" required>
+      <mat-button-toggle value="High School">High School</mat-button-toggle>
+      <mat-button-toggle value ="College">College</mat-button-toggle>
+      <mat-button-toggle value ="Business or Trade School">Business or Trade School</mat-button-toggle>
+      <mat-button-toggle value="Professional School">Professional School</mat-button-toggle>
+    </mat-button-toggle-group><br>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="text" #schoolAddress="ngModel" [(ngModel)]="userService.selectedUser.schoolAddress" name="schoolAddress" placeholder="School Address"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolAddress.valid }">
+    <div *ngIf="signUpForm.submitted && schoolAddress.errors">
+      <label *ngIf="schoolAddress.errors.required" class="validation-message">This field is required.</label>
+    </div>
+    <input type="text" #schoolCity="ngModel" [(ngModel)]="userService.selectedUser.schoolCity" name="schoolCity" placeholder="School City"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolCity.valid }">
+    <div *ngIf="signUpForm.submitted && schoolCity.errors">
+      <label *ngIf="schoolCity.errors.required" class="validation-message">This field is required.</label>
+    </div>
+    <input type="text" #schoolState="ngModel" [(ngModel)]="userService.selectedUser.schoolState" name="schoolState" placeholder="School State"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolState.valid }">
+    <div *ngIf="signUpForm.submitted && schoolState.errors">
+      <label *ngIf="schoolState.errors.required" class="validation-message">This field is required.</label>
+    </div>
+    <input type="text" #schoolZIP="ngModel" [(ngModel)]="userService.selectedUser.schoolZIP" name="schoolZIP" placeholder="School ZIP"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolZIP.valid }">
+    <div *ngIf="signUpForm.submitted && schoolZIP.errors">
+      <label *ngIf="schoolZIP.errors.required" class="validation-message">This field is required.</label>
+    </div>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+    <input type="text" #schoolDegree="ngModel" [(ngModel)]="userService.selectedUser.schoolDegree" name="schoolDegree" placeholder="Degree"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolDegree.valid }">
+    <div *ngIf="signUpForm.submitted && schoolDegree.errors">
+      <label *ngIf="schoolDegree.errors.required" class="validation-message">This field is required.</label>
+    </div>
+    <input type="text" #schoolMajor="ngModel" [(ngModel)]="userService.selectedUser.schoolMajor" name="schoolMajor" placeholder="Major"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolMajor.valid }">
+    <div *ngIf="signUpForm.submitted && schoolMajor.errors">
+      <label *ngIf="schoolMajor.errors.required" class="validation-message">This field is required.</label>
+    </div>
+    <input type="text" #schoolYears="ngModel" [(ngModel)]="userService.selectedUser.schoolYears" name="schoolYears" placeholder="Years Completed"
+    required [ngClass]="{'invalid-textbox' :signUpForm.submitted && !schoolYears.valid }">
+    <div *ngIf="signUpForm.submitted && schoolYears.errors">
+      <label *ngIf="schoolYears.errors.required" class="validation-message">This field is required.</label>
+    </div>
+  </div>
+  <div class="center1" fxLayout="column" fxLayoutGap="32px">
+      <input type="submit" value="ADD">
+  </div>
+</form>
+
+<!-- Success message -->
+<div class="success" *ngIf="showSucessMessage">
+  Saved successfully
+</div>
+
+<!-- Error message -->
+<div class="alert" *ngIf="serverErrorMessages">
+  {{serverErrorMessages}}
+</div>
+
+
+
+<!--
+<body>
+  <mat-accordion>
+      <mat-expansion-panel>
+          <body>
+              <div class="row">
+                <div class="col s12">
+                  <div class="card">
+                    <div class="card-content white-text">
+                      <div class="row">
+                        <div class="col s5">
+                          <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+                            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id">
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <label>School Name :
+                                  <label class="red-text">*</label>
+                                </label>
+                                <input type="text" name="schoolName" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.schoolName" placeholder="Enter School Name" required>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="input-field col s12">
+                                  <label>School Address :</label>
+                                  <label class="red-text">*</label>
+                                  >                   <input type="text" name="schoolAddress" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.schoolAddress" placeholder="School Address" required>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <label>School City :
+                                  <label class="red-text">*</label>
+                                </label>
+                                <input type="text" name="schoolCity" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.schoolCity" placeholder="Enter School City" required>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <label>School State :
+                                  <label class="red-text">*</label>
+                                </label>
+                                <input type="text" name="schoolState" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.schoolState" placeholder="Enter School State" required>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <label>School ZIP :
+                                  <label class="red-text">*</label>
+                                </label>
+                                <input type="text" name="schoolZIP" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.schoolZIP" placeholder="Enter School ZIP" required>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <button class="btn btn-custom right" type="button" (click)="resetForm(employeeForm)">Reset</button>
+                                <button class="btn btn-custom right" type="submit" [disabled]="!employeeForm.valid">Submit</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="col s7">
+                            <table class="responsive-table highlight">
+                                <thead>
+                                  <tr>
+                                    <th>School Name</th>
+                                    <th>School Address</th>
+                                    <th>School City</th>
+                                    <th>School State</th>
+                                    <th></th>
+                                  </tr>
+                                </thead>
+                                <tr *ngFor="let emp of employeeService.employees">
+                                  <td>{{emp.name}}</td>
+                                  <td>{{emp.position}}</td>
+                                  <td>
+                                      <a class="action-btn" (click)="onEdit(emp)">
+                                        <i class="material-icons">edit</i>
+                                      </a>
+                                      <a class="action-btn" (click)="onDelete(emp._id,employeeForm)">
+                                        <i class="material-icons">delete</i>
+                                      </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </body>
+      </mat-expansion-panel>
+
+
+
+        <mat-expansion-panel>
+
+              <form #myForm="ngForm">
+                  <div *ngFor="let certificate of CertificationList">
+                    <div style="border:1px solid blue; text-align:center; padding:10px; margin:5px;">
+                      <mat-form-field>
+                        <input matInput placeholder="Issuer / Authority">
+                      </mat-form-field>
+                      <mat-form-field>
+                        <input matInput placeholder="Certification">
+                      </mat-form-field><br>
+                    </div>
+                  </div>
+              </form>
+              <button mat-stroked-button color="primary" (click)="addNewCertification()"><b> Add New Certification</b></button>&nbsp;&nbsp;<button mat-raised-button color="warn" (click)="removeLastCertification()"><b>Remove Last Certification</b></button>
+          </mat-expansion-panel>
+    </mat-accordion>
+    &nbsp;
+    <br>
+    <div>
+    <span md-colors="{color:'primary'}">
+        <mat-card-title>
+            Welcome to the Calisota App!
+        </mat-card-title><br><br>
+        <mat-card-content>
+        <button mat-raised-button color="primary" style="margin-right:5px;">Submit</button>
+        </mat-card-content>
+      </span>
+</div>
+</body>
+
+-->
